@@ -11,6 +11,7 @@ namespace Olts.Domain
         public Int32 Id { get; set; }
 
         public virtual List<Answer> Answers { get; set; }
+        public virtual List<Survey> Surveys { get; set; } 
 
         public String Name { get; set; }
         
