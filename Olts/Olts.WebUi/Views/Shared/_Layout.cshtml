@@ -24,9 +24,20 @@
                     </section>
                     <nav>
                         <ul id="menu">
-                            <li>@Html.ActionLink("Home", "index", "Home")</li>
-                            <li>@Html.ActionLink("About", "about", "Home")</li>
-                            <li>@Html.ActionLink("Contact", "contact", "Home")</li>
+                            @{
+                                if (Roles.IsUserInRole("Administrator"))
+                                {
+                                    <li>@Html.ActionLink("View Users", "Users", "Admin")</li>
+                                }
+                                else if (Roles.IsUserInRole("Teacher"))
+                                {
+                                        
+                                }
+                                else if (Roles.IsUserInRole("User"))
+                                {
+                                    <li>@Html.ActionLink("View Surveys", "Surveys", "User")</li>
+                                }
+                            }       
                         </ul>
                     </nav>
                 </div>
@@ -41,7 +52,7 @@
         <footer>
             <div>
                 <div>
-                    <p>&copy; @DateTime.Now.Year - My ASP.NET MVC Application</p>
+                    <p>&copy; @DateTime.Now.Year ELEKS, All rights reserved</p>
                 </div>
             </div>
         </footer>

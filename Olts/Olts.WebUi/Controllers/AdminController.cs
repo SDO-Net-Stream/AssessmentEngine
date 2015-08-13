@@ -7,7 +7,7 @@ using WebMatrix.WebData;
 
 namespace Olts.WebUi.Controllers
 {
-    //[Authorize(Roles = "Administrator")]
+    [Authorize(Roles = "Administrator")]
     public class AdminController : Controller
     {
         #region GET

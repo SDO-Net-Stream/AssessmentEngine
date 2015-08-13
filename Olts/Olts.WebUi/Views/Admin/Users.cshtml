@@ -26,7 +26,8 @@
                     <td>@user.Name</td>
                     <td>@user.Roles.Aggregate((x, y) => x + ',' + y)</td>
                     <td>
-                        @Html.ActionLink("Delete", "delete", new { name = user.Name })
+                        @Html.ActionLink("Delete", "Delete", new { name = user.Name })
+                        @Html.ActionLink("Create", "Create")
                     </td>
                 </tr>
             }
