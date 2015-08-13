@@ -21,7 +21,7 @@
                 <td>@survey.Name</td>
                 <td>@survey.Description</td>
                 <td>
-                    @*@Html.ActionLink("", "", new { id = survey.Id })*@
+                    @Html.ActionLink("Start", "Survey", new { id = survey.Id })
                 </td>
             </tr>
         }
