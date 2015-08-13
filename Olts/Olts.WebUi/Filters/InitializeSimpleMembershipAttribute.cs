@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using System.Linq;
 using System.Threading;
 using System.Web.Mvc;
+using System.Web.Security;
 using Olts.DataAccess;
 using WebMatrix.WebData;
 
@@ -31,6 +33,26 @@ namespace Olts.WebUi.Filters
                         }
                     }
                     WebSecurity.InitializeDatabaseConnection("Olts", "Users", "Id", "Name", true);
+                    Roles.CreateRole("User");
+                    Roles.CreateRole("Administrator");
+                    Roles.CreateRole("Teacher");
+                    foreach (Int32 index in Enumerable.Range(1, 10))
+                    {
+                        var name = "user" + index + "@olts.com";
+                        WebSecurity.CreateUserAndAccount(name, name);
+                        if (index % 3 == 0)
+                        {
+                            Roles.AddUserToRole(name, "Administrator");
+                        }
+                        else if (index % 2 == 0)
+                        {
+                            Roles.AddUserToRole(name, "Teacher");
+                        }
+                        else
+                        {
+                            Roles.AddUserToRole(name, "User");
+                        }
+                    }
                 }
                 catch (Exception ex)
                 {

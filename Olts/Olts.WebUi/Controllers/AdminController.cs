@@ -7,7 +7,7 @@ using WebMatrix.WebData;
 
 namespace Olts.WebUi.Controllers
 {
-    [Authorize(Roles = "Administrator")]
+    //[Authorize(Roles = "Administrator")]
     public class AdminController : Controller
     {
         #region GET
@@ -19,12 +19,6 @@ namespace Olts.WebUi.Controllers
             return View(viewModel);
         }
         
-        [HttpGet]
-        public ActionResult Users(Int32 id)
-        {
-            return View();
-        }
-
         #endregion
 
         #region POST
@@ -47,7 +41,7 @@ namespace Olts.WebUi.Controllers
             return new EmptyResult();
         }
 
-        [HttpPost]
+        [HttpGet]
         public ActionResult Delete(String name)
         {
             var roles = Roles.GetRolesForUser(name);
@@ -57,10 +51,10 @@ namespace Olts.WebUi.Controllers
             }
             var membershipProvider = (SimpleMembershipProvider) Membership.Provider;
             var isAccountDeleted = membershipProvider.DeleteAccount(name);
-            var isUserDeleted = membershipProvider.DeleteAccount(name);
+            var isUserDeleted = membershipProvider.DeleteUser(name, true);
             // TODO: Show appropriate message in case if user or account wasn't deleted successfully
 
-            return View("Users");
+            return RedirectToAction("Users");
         }
 
         #endregion

@@ -16,7 +16,7 @@ namespace Olts.WebUi.Models.Admin
 
         public IEnumerable<String> Roles
         {
-            get { return _roles ?? (_roles = System.Web.Security.Roles.GetAllRoles()); }
+            get { return _roles ?? (_roles = new List<String>(1) { AllRoles }.Concat(System.Web.Security.Roles.GetAllRoles())); }
         }
 
         public IEnumerable<UserViewModel> Users
@@ -31,17 +31,16 @@ namespace Olts.WebUi.Models.Admin
                     {
                         contextUsers = contextUsers.Where(user => user.Name.Contains(UserName));
                     }
-                    if (!String.IsNullOrEmpty(Role))
-                    {
-                        contextUsers = contextUsers.Where(user => System.Web.Security.Roles.IsUserInRole(user.Name, Role));
-                    }
-
-                    users = contextUsers.Select(user => new UserViewModel(user));
+                    users = (!String.IsNullOrEmpty(Role) && Role != AllRoles ? 
+                        contextUsers.AsEnumerable().Where(user => System.Web.Security.Roles.IsUserInRole(user.Name, Role)) : 
+                        contextUsers.AsEnumerable())
+                    .Select(user => new UserViewModel(user)).ToList();
                 }
                 return users;
             }
         }
         
-        private String[] _roles;
+        private IEnumerable<String> _roles;
+        private const String AllRoles = "All";
     }
 }
