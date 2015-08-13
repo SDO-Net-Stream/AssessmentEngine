@@ -1,0 +1,32 @@
+﻿@{
+    ViewBag.Title = "Users";
+}
+@using Olts.WebUi.Models.Admin
+@model AdminViewModel
+
+<h2>@ViewBag.Title</h2>
+
+@Html.DropDownListFor(model => model.Role, new SelectList(Model.Roles))
+@Html.TextBoxFor(model => model.UserName)
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Roles</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (UserViewModel user in Model.Users)
+        {
+            <tr>
+                <td>@user.Name</td>
+                <td>@user.Roles.Aggregate((x, y) => x + ',' + y)</td>
+                <td>
+                    @Html.ActionLink("Delete", "delete", new { name = user.Name })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
