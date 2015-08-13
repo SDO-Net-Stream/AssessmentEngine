@@ -8,7 +8,7 @@ namespace Olts.DataAccess.DataMaps
     {
         public QuestionMap()
         {
-            ToTable("Question");
+            ToTable("Questions");
             HasKey(question => question.Id);
             Property(question => question.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             Property(question => question.Text).IsRequired();

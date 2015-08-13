@@ -8,7 +8,7 @@ namespace Olts.DataAccess.DataMaps
     {
         public OfferedAnswerMap()
         {
-            ToTable("OfferedAnswer");
+            ToTable("OfferedAnswers");
             HasKey(offeredAnswer => offeredAnswer.Id);
             Property(offeredAnswer => offeredAnswer.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             Property(question => question.AnswerText).IsRequired();

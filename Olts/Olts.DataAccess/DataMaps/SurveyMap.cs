@@ -8,7 +8,7 @@ namespace Olts.DataAccess.DataMaps
     {
         public SurveyMap()
         {
-            ToTable("Survey");
+            ToTable("Surveys");
             HasKey(survey => survey.Id);
             Property(survey => survey.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             Property(survey => survey.Name).IsRequired().HasMaxLength(64);

@@ -8,7 +8,7 @@ namespace Olts.DataAccess.DataMaps
     {
         public UserMap()
         {
-            ToTable("User");
+            ToTable("Users");
             HasKey(user => user.Id);
             Property(user => user.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             Property(user => user.Name).IsRequired().HasMaxLength(256);
