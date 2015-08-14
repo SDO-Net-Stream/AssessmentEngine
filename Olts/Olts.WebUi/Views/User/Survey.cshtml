@@ -12,41 +12,97 @@
 
 @using (Html.BeginForm("Survey", "User"))
 {
+    @Html.HiddenFor(model => model.SurveyId)
+    
     foreach (Question question in Model.Survey.Questions)
     {
-        <div>
+        <div class="question" id="@question.Id" type="@question.QuestionType">
             <b>@question.Text</b>
             <i>@question.QuestionType.ToString()</i>
-        </div>
-    
-        switch (@question.QuestionType)
-        {
-            case QuestionType.Checkbox:
-                <label>
-                    <input type="checkbox" />
-                    Chekbox Answer
-                </label>
-                break;
-            case QuestionType.Radio:
-                <label>
-                    <input type="radio" />
-                    Radio Answer
-                </label>
-                break;
-            case QuestionType.Textbox:
-                <input type="text" />
-                break;
-            case QuestionType.Textarea:
-                <textarea></textarea>
-                break;
-            default:
-                break;
-        }
+        
+            @switch (question.QuestionType)
+            {
+                case QuestionType.Checkbox:
+                    foreach (OfferedAnswer offeredAnswer in question.OfferedAnswers)
+                    {
+                        <label>
+                            <input type="checkbox" id="@offeredAnswer.Id" />
+                            @offeredAnswer.AnswerText
+                        </label>
+                    }
+                    break;
+                case QuestionType.Radio:
+                    foreach (OfferedAnswer offeredAnswer in question.OfferedAnswers)
+                    {
+                        <label>
+                            <input type="radio" name="@question.Id" id="@offeredAnswer.Id"/>
+                            @offeredAnswer.AnswerText
+                        </label>
+                    }
+                    break;
+                case QuestionType.Textbox:
+                    <input type="text" />
+                    break;
+                case QuestionType.Textarea:
+                    <textarea></textarea>
+                    break;
+                default:
+                    break;
+            }
+            </div>
     }
     
-    <input type="submit" value="Submit" />
+    <input id="submit" type="button" value="Submit" />
 }
 
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#submit').on('click', function(event) {
+            var that = $(this);
+            var form = that.closest('form');
+            var surveyId = $('#SurveyId', form).val();
+            var data = { surveyId: surveyId, answers: [] };
+            $('.question', form).each(function() {
+                var question = $(this);
+                var answer = {
+                    QuestionId: question.attr('id')
+                };
+                switch (question.attr('type').toLowerCase()) {
+                    case 'checkbox':
+                        var selected = $('[type="checkbox"]', question).filter(':checked');
+                        answer.offeredAnswers = [];
+                        selected.each(function () {
+                            var checkbox = $(this);
+                            answer.offeredAnswers.push(checkbox.attr('id'));
+                        });
+                        break;
+                    case 'textarea':
+                        answer.otherText = $('textarea', question).val();
+                        break;
+                    case 'textbox':
+                        answer.otherText = $('[type="text"]', question).val();
+                        break;
+                    case 'radio':
+                        answer.offeredAnswers = [];
+                        var radio = $('[type="radio"]', question).filter(':checked');
+                        answer.offeredAnswers.push(radio.attr('id'));
+                        break;
+                }
+                
+                data.answers.push(answer);
+            });
+            $.ajax({
+                type: 'post',
+                data: JSON.stringify(data),
+                contentType: "application/json; charset=utf-8",
+                success: function () {
+                    //
+                }
+            });
+        });
+
+    });
+</script>
 
 
 

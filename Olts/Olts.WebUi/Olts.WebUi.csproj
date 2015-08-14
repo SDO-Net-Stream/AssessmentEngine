@@ -194,6 +194,7 @@
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\Admin\AdminViewModel.cs" />
     <Compile Include="Models\Admin\UserViewModel.cs" />
+    <Compile Include="Models\User\SurveyResultViewModel.cs" />
     <Compile Include="Models\User\SurveyViewModel.cs" />
     <Compile Include="Models\ViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

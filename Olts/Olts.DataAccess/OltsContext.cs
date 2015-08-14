@@ -62,6 +62,7 @@ namespace Olts.DataAccess
             modelBuilder.Configurations.Add(new QuestionMap());
             modelBuilder.Configurations.Add(new OfferedAnswerMap());
             modelBuilder.Configurations.Add(new AnswerMap());
+            modelBuilder.Configurations.Add(new AnswerOfferedAnswerMap());
             base.OnModelCreating(modelBuilder);
         }
     }

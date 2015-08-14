@@ -5,6 +5,7 @@ using System.Web.Mvc;
 using Olts.Domain;
 using Olts.WebUi.Controllers.Base;
 using Olts.WebUi.Models.User;
+using WebMatrix.WebData;
 
 namespace Olts.WebUi.Controllers
 {
@@ -21,7 +22,7 @@ namespace Olts.WebUi.Controllers
         [HttpGet]
         public ActionResult Survey(Int32 id)
         {
-            var viewModel = new SurveyViewModel { Id = id };
+            var viewModel = new SurveyViewModel { SurveyId = id };
             return View(viewModel);
         }
 
@@ -30,9 +31,28 @@ namespace Olts.WebUi.Controllers
         #region POST
 
         [HttpPost]
-        public ActionResult Survey(SurveyViewModel viewModel)
+        public ActionResult Survey(SurveyResultViewModel viewModel)
         {
-            return View(viewModel);
+            Int32 userId = WebSecurity.CurrentUserId;
+            foreach (AnswerViewModel answerViewModel in viewModel.Answers)
+            {
+                var answer = new Answer
+                {
+                    User = Context.Users.Find(userId),
+                    Survey = Context.Surveys.Find(viewModel.SurveyId),
+                    Question = Context.Questions.Find(answerViewModel.QuestionId),
+                    OtherText = answerViewModel.OtherText
+                };
+                if (answerViewModel.OfferedAnswers != null && answerViewModel.OfferedAnswers.Any())
+                {
+                    answer.AnswersOfferedAnswers = new List<AnswerOfferedAnswer>(answerViewModel.OfferedAnswers.Count);
+                    answer.AnswersOfferedAnswers.AddRange(answerViewModel.OfferedAnswers.Select(id => new AnswerOfferedAnswer { OfferedAnswerId = id }));
+                }
+                Context.Answers.Add(answer);
+                Context.SaveChanges();
+            }
+            
+            return RedirectToAction("Surveys");
         }
 
         #endregion

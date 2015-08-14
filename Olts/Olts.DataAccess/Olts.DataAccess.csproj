@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataMaps\AnswerMap.cs" />
+    <Compile Include="DataMaps\AnswerOfferedAnswerMap.cs" />
     <Compile Include="DataMaps\OfferedAnswerMap.cs" />
     <Compile Include="DataMaps\QuestionMap.cs" />
     <Compile Include="DataMaps\SurveyMap.cs" />

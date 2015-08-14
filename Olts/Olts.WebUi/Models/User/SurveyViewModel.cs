@@ -9,7 +9,7 @@ namespace Olts.WebUi.Models.User
 {
     public sealed class SurveyViewModel
     {
-        public Int32 Id { get; set; }
+        public Int32 SurveyId { get; set; }
 
         public Survey Survey
         {
@@ -21,14 +21,15 @@ namespace Olts.WebUi.Models.User
                     {
                         _survey = context.Surveys
                             .Include(s => s.Questions)
-                            .Single(s => s.Id == Id);
+                            .Include("Questions.OfferedAnswers")
+                            .Single(s => s.Id == SurveyId);
                     }
                 }
                 return _survey;
             }
         }
 
-        public IEnumerable<Answer> Answers { get; set; }
+        public List<Answer> Answers { get; set; }
 
         private Survey _survey;
     }

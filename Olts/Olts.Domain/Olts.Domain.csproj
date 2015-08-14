@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Answer.cs" />
+    <Compile Include="AnswerOfferedAnswer.cs" />
     <Compile Include="Enums\QuestionType.cs" />
     <Compile Include="OfferedAnswer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

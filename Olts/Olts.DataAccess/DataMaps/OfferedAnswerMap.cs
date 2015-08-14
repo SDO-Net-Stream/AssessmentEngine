@@ -12,6 +12,7 @@ namespace Olts.DataAccess.DataMaps
             HasKey(offeredAnswer => offeredAnswer.Id);
             Property(offeredAnswer => offeredAnswer.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             Property(question => question.AnswerText).IsRequired();
+            Property(question => question.Correct).IsRequired();
         }
     }
 }

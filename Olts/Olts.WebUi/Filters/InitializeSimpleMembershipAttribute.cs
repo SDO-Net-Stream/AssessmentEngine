@@ -81,8 +81,16 @@ namespace Olts.WebUi.Filters
                         Owner = context.Users.First(),
                         Questions = new List<Question>
                         {
-                            new Question { QuestionType = QuestionType.Checkbox, Text = "Question " + index },
-                            new Question { QuestionType = QuestionType.Radio, Text = "Question " + index },
+                            new Question
+                            {
+                                QuestionType = QuestionType.Checkbox, Text = "Question " + index,
+                                OfferedAnswers = new List<OfferedAnswer> { new OfferedAnswer { AnswerText = "1" }, new OfferedAnswer { AnswerText = "2" }, new OfferedAnswer { AnswerText = "3" } }
+                            },
+                            new Question
+                            {
+                                QuestionType = QuestionType.Radio, Text = "Question " + index,
+                                OfferedAnswers = new List<OfferedAnswer> { new OfferedAnswer { AnswerText = "1" }, new OfferedAnswer { AnswerText = "2" }, new OfferedAnswer { AnswerText = "3" } }
+                            },
                             new Question { QuestionType = QuestionType.Textbox, Text = "Question " + index },
                             new Question { QuestionType = QuestionType.Textarea, Text = "Question " + index }
                         }

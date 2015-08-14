@@ -13,7 +13,7 @@ namespace Olts.Domain
         public virtual Survey Survey { get; set; }
         public virtual Question Question { get; set; }
         public virtual User User { get; set; }
-        public virtual List<OfferedAnswer> OfferedAnswer { get; set; }
+        public virtual List<AnswerOfferedAnswer> AnswersOfferedAnswers { get; set; }
 
         public String OtherText { get; set; }
     }
