@@ -31,7 +31,7 @@ namespace Olts.WebUi.Controllers
         #region POST
 
         [HttpPost]
-        public ActionResult Survey(SurveyResultViewModel viewModel)
+        public JsonResult Survey(SurveyResultViewModel viewModel)
         {
             Int32 userId = WebSecurity.CurrentUserId;
             foreach (AnswerViewModel answerViewModel in viewModel.Answers)
@@ -51,8 +51,8 @@ namespace Olts.WebUi.Controllers
                 Context.Answers.Add(answer);
                 Context.SaveChanges();
             }
-            
-            return RedirectToAction("Surveys");
+
+            return Json(Url.Action("Surveys"));
         }
 
         #endregion

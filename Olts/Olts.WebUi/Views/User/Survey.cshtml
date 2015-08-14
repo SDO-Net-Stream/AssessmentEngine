@@ -95,8 +95,8 @@
                 type: 'post',
                 data: JSON.stringify(data),
                 contentType: "application/json; charset=utf-8",
-                success: function () {
-                    //
+                success: function (url) {
+                    window.location = url;
                 }
             });
         });
