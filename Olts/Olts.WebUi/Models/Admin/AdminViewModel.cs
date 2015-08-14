@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using Olts.DataAccess;
-using Olts.Domain;
 
 namespace Olts.WebUi.Models.Admin
 {
@@ -26,7 +25,7 @@ namespace Olts.WebUi.Models.Admin
                 IEnumerable<UserViewModel> users;
                 using (var context = new OltsContext())
                 {
-                    IQueryable<User> contextUsers = context.Users.AsQueryable();
+                    IQueryable<Domain.User> contextUsers = context.Users.AsQueryable();
                     if (!String.IsNullOrEmpty(UserName))
                     {
                         contextUsers = contextUsers.Where(user => user.Name.Contains(UserName));

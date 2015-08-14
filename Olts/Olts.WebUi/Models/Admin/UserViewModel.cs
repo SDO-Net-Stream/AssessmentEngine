@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Olts.Domain;
 
 namespace Olts.WebUi.Models.Admin
 {
@@ -11,7 +10,7 @@ namespace Olts.WebUi.Models.Admin
             //
         }
 
-        public UserViewModel(User user)
+        public UserViewModel(Domain.User user)
         {
             Name = user.Name;
             Roles = System.Web.Security.Roles.GetRolesForUser(user.Name);

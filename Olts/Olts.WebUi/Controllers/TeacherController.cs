@@ -1,20 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using Olts.WebUi.Controllers.Base;
 
 namespace Olts.WebUi.Controllers
 {
-    public class TeacherController : Controller
+    public class TeacherController : OltsControllerBase
     {
-        //
-        // GET: /Teacher/
-
-        public ActionResult Index()
-        {
-            return View();
-        }
-
     }
 }

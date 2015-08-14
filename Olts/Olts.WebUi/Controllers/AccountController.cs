@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using System.Web.Security;
 using DotNetOpenAuth.AspNet;
 using Microsoft.Web.WebPages.OAuth;
+using Olts.WebUi.Controllers.Base;
 using WebMatrix.WebData;
 using Olts.WebUi.Filters;
 using Olts.WebUi.Models;
@@ -15,7 +16,7 @@ namespace Olts.WebUi.Controllers
 {
     [Authorize]
     [InitializeSimpleMembership]
-    public class AccountController : Controller
+    public class AccountController : OltsControllerBase
     {
         //
         // GET: /Account/Login

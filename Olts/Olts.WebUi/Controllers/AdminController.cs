@@ -2,13 +2,14 @@
 using System.Linq;
 using System.Web.Mvc;
 using System.Web.Security;
+using Olts.WebUi.Controllers.Base;
 using Olts.WebUi.Models.Admin;
 using WebMatrix.WebData;
 
 namespace Olts.WebUi.Controllers
 {
     [Authorize(Roles = "Administrator")]
-    public class AdminController : Controller
+    public class AdminController : OltsControllerBase
     {
         #region GET
 

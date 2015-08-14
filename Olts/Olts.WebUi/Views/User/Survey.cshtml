@@ -2,19 +2,51 @@
     ViewBag.Title = "Survey";
 }
 @using Olts.Domain
-@model Survey
+@using Olts.Domain.Enums
+@model Olts.WebUi.Models.User.SurveyViewModel
 
 <h2>@ViewBag.Title</h2>
 
-<h3>Model.Name</h3>
-<h6>Model.Desciption</h6>
+<h3>@Model.Survey.Name</h3>
+<h6>@Model.Survey.Description</h6>
 
-@foreach (Question question in Model.Questions)
+@using (Html.BeginForm("Survey", "User"))
 {
-    <b>@question.Text</b>
+    foreach (Question question in Model.Survey.Questions)
+    {
+        <div>
+            <b>@question.Text</b>
+            <i>@question.QuestionType.ToString()</i>
+        </div>
     
+        switch (@question.QuestionType)
+        {
+            case QuestionType.Checkbox:
+                <label>
+                    <input type="checkbox" />
+                    Chekbox Answer
+                </label>
+                break;
+            case QuestionType.Radio:
+                <label>
+                    <input type="radio" />
+                    Radio Answer
+                </label>
+                break;
+            case QuestionType.Textbox:
+                <input type="text" />
+                break;
+            case QuestionType.Textarea:
+                <textarea></textarea>
+                break;
+            default:
+                break;
+        }
+    }
     
+    <input type="submit" value="Submit" />
 }
+
 
 
 
